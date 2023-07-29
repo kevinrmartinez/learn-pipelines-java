@@ -8,13 +8,15 @@ trigger:
 
 strategy:
   matrix:
-    linux:
+    jdk10_linux:
       imageName: "ubuntu-latest"
-    mac:
-      imageName: "macOS-latest"
-    windows:
+      jdkVersion: "1.10"
+#    mac:
+#      imageName: "macOS-latest"
+    jdk11_windows:
       imageName: "windows-latest"
-  maxParallel: 3
+      jdkVersion: "1.11"
+  maxParallel: 2
 
 pool:
   vmImage: windows-latest
@@ -35,5 +37,5 @@ steps:
   inputs:
     codeCoverageTool: "JaCoCo"
     summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
-    reportDirectory: "$$(System.DefaultWorkingDirectory)/**/site/jacoco"
+    reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
     failIfCoverageEmpty: true
